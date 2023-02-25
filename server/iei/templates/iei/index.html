@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Intelligent Ecstatic Illustrator</title>
+    {% load static %}
+</head>
+<body>
+<h1>Intelligent Ecstatic Illustrator</h1>
+<a href="{% url 'iei:create_task' %}">Create a task</a>
+
+{% if latest_tasks %}
+    {% for task in latest_tasks %}
+        <h2>Task #{{ task.task_id }} - {{ task.status }}</h2>
+        {% if task.images %}
+            <ul>
+                {% for image in task.images %}
+                    <li><img alt="{{ image.image_id }}" src="{% static image.image_url %}" width="512" height="384"></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endfor %}
+
+{% else %}
+    <p>No tasks are available.</p>
+{% endif %}
+</body>
+</html>

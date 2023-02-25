@@ -1,0 +1,7 @@
+.idea/
+__pycache__/
+env
+factory/outputs/
+server/db.sqlite3
+server/iei/migrations/
+server/iei/static/iei/images/outputs/

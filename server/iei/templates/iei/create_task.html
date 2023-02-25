@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a task</title>
+</head>
+<body>
+<h1>Create a task</h1>
+<form action="{% url 'iei:create_task_post' %}" method="post">
+    {% csrf_token %}
+
+    <input type="submit" value="提交">
+
+    <h2>咒语</h2>
+
+    <label for="prompt">Prompt:</label>
+    <input id="prompt" type="text" name="prompt" value="cute, girl, blue sky"><br><br>
+
+    <label for="negative_prompt">Negative prompt:</label>
+    <input id="negative_prompt" type="text" name="negative_prompt"><br><br>
+
+    <h2>采样</h2>
+
+    <label for="steps">Sampling Steps:</label>
+    <input id="steps" type="number" min="1" max="150" name="steps" value="20"><br><br>
+
+    <label for="sampler_name">Sampling method:</label>
+    <select id="sampler_name" name="sampler_name">
+        <option value="Euler a" selected="selected">Euler a</option>
+        <option value="Euler">Euler</option>
+        <option value="LMS">LMS</option>
+        <option value="Heun">Heun</option>
+        <option value="DPM2">DPM2</option>
+        <option value="DPM2 a">DPM2 a</option>
+        <option value="DPM++ 2S a">DPM++ 2S a</option>
+        <option value="DPM++ 2M">DPM++ 2M</option>
+        <option value="DPM++ SDE">DPM++ SDE</option>
+        <option value="DPM fast">DPM fast</option>
+        <option value="DPM adaptive">DPM adaptive</option>
+        <option value="LMS Karras">LMS Karras</option>
+        <option value="DPM2 Karras">DPM2 Karras</option>
+        <option value="DPM2 a Karras">DPM2 a Karras</option>
+        <option value="DPM++ 2S a Karras">DPM++ 2S a Karras</option>
+        <option value="DPM++ 2M Karras">DPM++ 2M Karras</option>
+        <option value="DPM++ SDE Karras">DPM++ SDE Karras</option>
+        <option value="DDIM">DDIM</option>
+        <option value="PLMS">PLMS</option>
+    </select><br><br>
+
+    <h2>大小</h2>
+
+    <label for="width">Width:</label>
+    <input id="width" type="number" min="1" max="1024" name="width" value="512"><br><br>
+
+    <label for="height">Height:</label>
+    <input id="height" type="number" min="1" max="1024" name="height" value="384"><br><br>
+
+    <h2>任务</h2>
+
+    <label for="n_iter">Batch count:</label>
+    <input id="n_iter" type="number" min="1" max="100" name="n_iter" value="2"><br><br>
+
+    <label for="batch_size">Batch size:</label>
+    <input id="batch_size" type="number" min="1" max="8" name="batch_size" value="4"><br><br>
+
+    <h2>优化</h2>
+
+    <label for="restore_faces">Restore faces:</label>
+    <input id="restore_faces" type="checkbox" name="restore_faces"><br><br>
+
+    <label for="tiling">Tiling:</label>
+    <input id="tiling" type="checkbox" name="tiling"><br><br>
+
+    <h3>高对比度修复</h3>
+
+    <label for="enable_hr">Highres. fix:</label>
+    <input id="enable_hr" type="checkbox" name="enable_hr"><br><br>
+
+    <label for="firstphase_width">Firstpass width:</label>
+    <input id="firstphase_width" type="number" min="0" max="1024" name="firstphase_width" value="0"><br><br>
+
+    <label for="firstphase_height">Firstpass height:</label>
+    <input id="firstphase_height" type="number" min="0" max="1024" name="firstphase_height" value="0"><br><br>
+
+    <label for="denoising_strength">Denoising strength:</label>
+    <input id="denoising_strength" type="number" min="0.0" max="1.0" step="0.01" name="denoising_strength"
+           value="0.7"><br><br>
+
+    <h2>随机性</h2>
+
+    <label for="cfg_scale">CFG Scale:</label>
+    <input id="cfg_scale" type="number" min="1.0" max="30.0" step="0.5" name="cfg_scale" value="7.0"><br><br>
+
+    <label for="seed">Seed:</label>
+    <input id="seed" type="number" name="seed" value="-1"><br><br>
+
+    <label for="subseed">Variation seed:</label>
+    <input id="subseed" type="number" name="subseed" value="-1"><br><br>
+
+    <label for="subseed_strength">Variation strength:</label>
+    <input id="subseed_strength" type="number" min="0.0" max="1.0" step="0.01" name="subseed_strength"
+           value="0.0"><br><br>
+
+    <label for="seed_resize_from_w">Resize seed from width:</label>
+    <input id="seed_resize_from_w" type="number" min="0" max="2048" name="seed_resize_from_w" value="0"><br><br>
+
+    <label for="seed_resize_from_h">Resize seed from height:</label>
+    <input id="seed_resize_from_h" type="number" min="0" max="2048" name="seed_resize_from_h" value="0"><br><br>
+
+    <h2>其它</h2>
+
+    <label for="eta">eta (noise multiplier) for DDIM:</label>
+    <input id="eta" type="number" min="0.0" max="1.0" step="0.01" name="eta" value="0.0"><br><br>
+
+    <label for="s_churn">sigma churn:</label>
+    <input id="s_churn" type="number" min="0.0" max="1.0" step="0.01" name="s_churn" value="0.0"><br><br>
+
+    <label for="s_tmin">sigma tmin:</label>
+    <input id="s_tmin" type="number" min="0.0" max="1.0" step="0.01" name="s_tmin" value="0.0"><br><br>
+
+    <label for="s_noise">sigma noise:</label>
+    <input id="s_noise" type="number" min="0.0" max="1.0" step="0.01" name="s_noise" value="1.0"><br><br>
+</form>
+</body>
+</html>
